@@ -6,16 +6,18 @@ class Canvas{
 public:
 	int xSize;
 	int ySize;
-	std::ofstream myfile;	
+	std::ofstream myfile;
+	std::string filename;
 
 	Canvas(){}
-	Canvas(int _xSize, int _ySize){		
+	Canvas(int _xSize, int _ySize, std::string _filename = "default.ppm"){		
 		xSize = _xSize;
 		ySize = _ySize;
+		filename = _filename;
 	}
 
 	void clear(){
-		myfile.open ("helloworld.ppm");
+		myfile.open(filename.c_str());
 
 		myfile<< "P3"  << std::endl
 			  << xSize << " " << ySize << std::endl 
@@ -50,7 +52,7 @@ public:
 	}
 
 	void drawLineBetweenPoints(int x1, int y1, int x2, int y2){
-		myfile.open ("helloworld.ppm");
+		myfile.open(filename.c_str());
 
 		myfile<< "P3"  << std::endl
 			  << xSize << " " << ySize << std::endl 
