@@ -21,42 +21,12 @@ public:
 			  << xSize << " " << ySize << std::endl 
 			  << "255" << std::endl;
 
-		for (int j = 0; j <  xSize; j++){
-			for(int i = 0; i < ySize; i++){
+		for (int j = 0; j <  ySize; j++){
+			for(int i = 0; i < xSize; i++){
 
 				int r  = 255;
 				int g  = 255;
 				int b  = 255;
-
-				myfile<< r << " " << g << " " << b << std::endl;
-			}
-		}
-	}
-
-	void drawLine(){
-		myfile.open ("helloworld.ppm");
-
-		myfile<< "P3"  << std::endl
-			  << xSize << " " << ySize << std::endl 
-			  << "255" << std::endl;
-
-
-		int r  = 0;
-		int g  = 0;
-		int b  = 0;
-
-		for (int j = 0; j <  xSize; j++){
-			for(int i = 0; i < ySize; i++){
-
-				if(i==j){
-					r  = 0;
-					g  = 0;
-					b  = 0;
-				}else{
-					r  = 255;
-					g  = 255;
-					b  = 255;
-				}
 
 				myfile<< r << " " << g << " " << b << std::endl;
 			}
