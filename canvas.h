@@ -1,6 +1,7 @@
 #include <math.h>
 #include <iostream>
 #include <fstream>
+#include "point.h"
 
 class Canvas{
 public:
@@ -36,22 +37,22 @@ public:
 	}
 
 	//Gera o coeficiente angular para dois pontos no canvas
-	float getM(int x1, int y1, int x2, int y2){
-		return (float)(y2-y1)/(float)(x2-x1);
+	float getM(Point starter, Point final){
+		return (float)(final.getY() - starter.getY())/(final.getX() - starter.getX() );
 	}
 	
 	//Gera o Y inicial para traçar uma reta
-	float getB(int x1, int y1, float m){
-		return (y1 - m*x1); 
+	float getB(Point starter, float m){
+		return (starter.getY() - m*starter.getX() ); 
 	}
 
 
-	bool belongsInLine(float m, float b, int currentX, int currentY){
-		int virtualY = float(m*currentX + b);
-		return currentY == virtualY;
+	bool belongsInLine(float m, float b, Point current){
+		int virtualY = (m*current.getX() + b);
+		return current.getY() == virtualY;
 	}
 
-	void drawLineBetweenPoints(int x1, int y1, int x2, int y2){
+	void drawLineBetweenPoints(Point starter, Point final){
 		myfile.open(filename.c_str());
 
 		myfile<< "P3"  << std::endl
@@ -63,13 +64,14 @@ public:
 		int g  = 0;
 		int b  = 0;
 
-		float _m = getM(x1,y1,x2,y2);//coeficiente angular
-		float _b = getB(x1,y1,_m);    //Y inicial
+		float _m = getM(starter, final);//coeficiente angular
+		float _b = getB(starter, _m);    //Y inicial
 
 		for (int j = 0; j <  ySize; j++){
 			for(int i = 0; i < xSize; i++){
+				Point current(i,j);
 
-				if( belongsInLine(_m,_b,i,j) ){
+				if( belongsInLine(_m,_b, current) ){
 					r  = 0;
 					g  = 0;
 					b  = 0;
